@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Flower Bouquet 💐</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gradient-to-br from-pink-100 via-purple-50 to-rose-100 min-h-screen">
+    <!-- Sexy Popup Window -->
+    <div id="sexyPopup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
+        <div class="sexy-popup-content bg-white rounded-2xl p-8 max-w-md mx-4 transform transition-all duration-500 scale-100">
+            <div class="text-center">
+                <img src="assets/Example.jpg" alt="Sexy Surprise" class="w-32 h-32 object-cover rounded-full mx-auto mb-6 shadow-lg">
+                <h1 class="text-2xl font-dancing text-white -600 mb-6 animate-pulse">
+                    Are you ready my DNC for the surprise? 💋
+                </h1>
+                <div class="flex gap-4 justify-center">
+                    <button id="yesBtn" class="sexy-btn-yes">
+                        Yes! 💖
+                    </button>
+                    <button id="noBtn" class="sexy-btn-no">
+                        No 😢
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Please Popup (shows when No is clicked) -->
+    <div id="pleasePopup" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
+        <div class="please-popup-content bg-white rounded-2xl p-8 max-w-md mx-4 transform transition-all duration-500 scale-100">
+            <div class="text-center">
+                <img src="assets/haha.png" alt="Please" class="w-32 h-32 object-cover rounded-full mx-auto mb-6 shadow-lg">
+                <h1 class="text-2xl font-dancing text-pink-600 mb-6 animate-pulse">
+                    Achaaa! Esa krogi ab DNC huh ?? 💕
+                </h1>
+                <div class="flex justify-center">
+                    <button id="pleaseYesBtn" class="sexy-btn-yes">
+                        Click kro chlo!!! 💖
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- No Button Animation Container -->
+    <div id="noAnimation" class="hidden fixed inset-0 pointer-events-none z-40">
+        <div id="noButton" class="absolute text-4xl animate-bounce">No 😢</div>
+    </div>
+
+    <!-- Success Popup -->
+    <div id="successPopup" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
+        <div class="success-popup-content bg-gradient-to-r from-pink-400 to-purple-500 text-white rounded-2xl p-8 max-w-md mx-4 text-center animate-pulse">
+            <h1 class="text-3xl font-dancing mb-4">Just For You ! Because you like flowers so muchhhh 💐❤️</h1>
+            <img src="assets/yay.png" alt="Please" class="w-32 h-32 object-cover rounded-full mx-auto mb-6 shadow-lg">
+            <h2 class="text-2xl font-dancing mb-4">Hurray muahhhhh DNC! 💋💖</h2>
+            <p class="text-lg mb-6">You're the best! Let's explore your beautiful bouquet! 🌸</p>
+            <button id="continueBtn" class="sexy-btn-yes">
+                Continue to Bouquet 💐
+            </button>
+            
+            <div class="text-center mt-6">
+                <p class="text-white font-dancing text-sm opacity-80">
+                    -`♡´- Made by Your Mr.Sharma -`♡´-
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <!-- Audio source will be set dynamically -->
+    </audio>
+    
+    <!-- Music-triggered background animations -->
+    <div id="musicAnimations" class="fixed inset-0 pointer-events-none z-0 hidden">
+        <!-- Floating hearts -->
+        <div id="floatingHearts" class="absolute inset-0"></div>
+        
+        <!-- Music waves -->
+        <div id="musicWaves" class="absolute bottom-0 left-0 right-0 h-32"></div>
+        
+        <!-- Glowing orbs -->
+        <div id="glowingOrbs" class="absolute inset-0"></div>
+        
+        <!-- Sparkle effects -->
+        <div id="sparkles" class="absolute inset-0"></div>
+        
+        <!-- Rainbow trails -->
+        <div id="rainbowTrails" class="absolute inset-0"></div>
+        
+        <!-- Floating roses -->
+        <div id="floatingRoses" class="absolute inset-0"></div>
+        
+        <!-- Love bubbles -->
+        <div id="loveBubbles" class="absolute inset-0"></div>
+        
+        <!-- Shooting stars -->
+        <div id="shootingStars" class="absolute inset-0"></div>
+        
+        <!-- Music notes -->
+        <div id="musicNotes" class="absolute inset-0"></div>
+        
+        <!-- Aurora effect -->
+        <div id="auroraEffect" class="absolute inset-0"></div>
+    </div>
+    
+    <div id="petals" class="fixed inset-0 pointer-events-none z-0"></div>
+    
+    <div class="main-container hidden">
+        <div class="glass-card">
+            <header class="text-center mb-12">
+                <h1 class="text-4xl md:text-6xl font-dancing font-bold text-pink-600 mb-4 animate-fade-in">
+                    💐 For You, My DNC 💌
+                </h1>
+                <p class="text-lg md:text-xl text-purple-600 font-poppins animate-fade-in-delay">
+                    Your digital flower world where you can share anything with me 💐💌
+                </p>
+            </header>
+    
+            <section id="bouquetSection" class="mb-12 flex justify-center items-center flex-col">
+                <div id="bouquetContainer" class="relative group cursor-pointer transform transition-all duration-500 hover:scale-110">
+                    <img id="bouquetImage" src="assets/flowers1.webp" alt="Flower Bouquet" class="max-w-lg w-full h-auto transition-all duration-500 transform group-hover:scale-105 drop-shadow-2xl rounded-2xl">
+                    <div id="bouquetMessage" class="absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl">
+                        <p class="text-white text-2xl font-dancing text-center p-4">You are the sunshine of my life!</p>
+                    </div>
+                </div>
+                
+                <!-- Download Button -->
+                <button id="downloadBouquetBtn" class="download-btn mt-6">
+                    💐 I want this bouquet! 💐
+                </button>
+            </section>
+
+            <!-- Bouquet Gallery -->
+            <!-- <section class="mb-12">
+                <h2 class="text-2xl font-dancing text-pink-600 text-center mb-6">🌸 Choose Your Favorite Bouquet 🌸</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+                    <div class="bouquet-thumbnail active" data-index="0">
+                        <img src="assets/flowers1.webp" alt="Bouquet 1" class="w-full h-32 object-cover rounded-lg cursor-pointer transition-all duration-300 hover:scale-105">
+                    </div>
+                    <div class="bouquet-thumbnail" data-index="1">
+                        <img src="assets/flowers2.webp" alt="Bouquet 2" class="w-full h-32 object-cover rounded-lg cursor-pointer transition-all duration-300 hover:scale-105">
+                    </div>
+                    <div class="bouquet-thumbnail" data-index="2">
+                        <img src="https://assets.stickpng.com/images/580b585b2edb1694ca4b5281.png" alt="Bouquet 3" class="w-full h-32 object-cover rounded-lg cursor-pointer transition-all duration-300 hover:scale-105">
+                    </div>
+                    <div class="bouquet-thumbnail" data-index="3">
+                        <img src="https://www.pngall.com/wp-content/uploads/13/Flower-Bouquet-Vector-PNG-Clipart.png" alt="Bouquet 4" class="w-full h-32 object-cover rounded-lg cursor-pointer transition-all duration-300 hover:scale-105">
+                    </div>
+                    <div class="bouquet-thumbnail" data-index="4">
+                        <img src="https://creazilla-store.fra1.digitaloceanspaces.com/cliparts/79820/flower-bouquet-clipart-xl.png" alt="Bouquet 5" class="w-full h-32 object-cover rounded-lg cursor-pointer transition-all duration-300 hover:scale-105">
+                    </div>
+                </div>
+            </section> -->
+    
+            <section class="text-center space-y-6 mb-12">
+                <button id="newBouquetBtn" class="btn-primary">
+                    🌸 Pick another bouquet! 🌸
+                </button>
+                
+                <button id="messageBtn" class="btn-secondary">
+                    💌 Feeling sad my Dnc? 💌
+                </button>
+            </section>
+    
+            <div class="text-center">
+                <button id="musicToggle" class="text-purple-600 hover:text-purple-800 transition-colors">
+                    🎵 Toggle Music
+                </button>
+            </div>
+            
+            <div class="text-center mt-8">
+                <p class="text-purple-600 hover:text-purple-800 transition-colors font-dancing text-lg">
+                    -`♡´- Made by Your Mr.Sharma -`♡´-
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="messageModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="pt-4">
+                <h2 class="text-2xl font-dancing text-pink-600 mb-4">💌 Share kro My DNC 💌</h2>
+                <form id="messageForm">
+                    <textarea 
+                        id="messageText" 
+                        placeholder="Kya batana hai my Dnc ? jo mann kare vo likho...kuch bhii...ye direct mail jayegi mujhe 😚" 
+                        class="w-full p-4 border-2 border-pink-200 rounded-lg focus:border-pink-400 focus:outline-none resize-none"
+                        rows="4"
+                    ></textarea>
+                    <button type="submit" class="btn-primary mt-4 w-full">
+                        Send Message 💖
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="loadingModal" class="modal hidden">
+        <div class="modal-content text-center">
+            <span class="close">&times;</span>
+            <div class="pt-4">
+                <div class="loader"></div>
+                <p class="text-lg text-purple-600 mt-4">Sending your sweet message...</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="successModal" class="modal hidden">
+        <div class="modal-content text-center">
+            <span class="close">&times;</span>
+            <div class="pt-4">
+                <div class="text-6xl mb-4">🌸</div>
+                <h2 class="text-2xl font-dancing text-pink-600 mb-4">Message Sent!</h2>
+                <p class="text-lg text-purple-600">
+                    🌸 Your message has been sent! I'll make your day better very soon 💖
+                </p>
+                <button id="closeSuccess" class="btn-primary mt-6">💕 Thank You 💕</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
